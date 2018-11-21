@@ -42,7 +42,7 @@ namespace AppStudent.ViewModels
 
         void Logout()
         {
-            NavigationService.NavigateAsync("Login");
+            NavigationService.NavigateAsync("LoginP");
         }
         public DelegateCommand<string> OnNavigateCommand { get; set; }
         void Navigate(string page)
