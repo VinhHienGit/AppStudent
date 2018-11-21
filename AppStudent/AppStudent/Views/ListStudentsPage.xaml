@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppStudent.Views.ListStudentsPage"
+             Title="{Binding Title}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ListViewItemText" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="Medium"/>
+                <Setter Property="TextColor" Value="DarkCyan"/>
+            </Style>
+            <Style x:Key="ListViewItemImage" TargetType="Image">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+                <Setter Property="Aspect" Value="AspectFill"/>
+            </Style>
+            <Style x:Key="ListViewItemTextDetail" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+                <Setter Property="VerticalTextAlignment" Value="Start"/>
+                <Setter Property="FontSize" Value="Small"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ListView x:Name="MyListView"
+            ItemsSource="{Binding ItemSouce}"
+            CachingStrategy="RecycleElement"
+            SelectedItem="{Binding SelectedItemb, Mode=TwoWay}">
+        <!--Built in Cells-->
+        <!--<ListView.ItemTemplate>
+            <DataTemplate>
+                <ImageCell ImageSource="ic_launcher.png" Text="Ahihi"/>
+            </DataTemplate>
+        </ListView.ItemTemplate>-->
+
+        <!--Custom View Cells-->
+
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Grid Padding="3,0,3,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="{Binding Image_link}"
+                       Grid.Row="0" Grid.Column="0" Grid.RowSpan="6"
+                          Style="{StaticResource ListViewItemImage}"/>
+                        <Label Text="{Binding Name}"
+                          Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="5" Grid.RowSpan="4"
+                          Style="{StaticResource ListViewItemText}"/>
+                        <Label Text= "{Binding Created_at, StringFormat={StaticResource dateMonthYear}}"
+                          Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4" Grid.RowSpan="3"
+                          Style="{StaticResource ListViewItemTextDetail}"/>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>
