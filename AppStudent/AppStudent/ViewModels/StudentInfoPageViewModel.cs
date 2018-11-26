@@ -9,7 +9,9 @@ namespace AppStudent.ViewModels
 {
     public class StudentInfoPageViewModel : ViewModelBase, INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler Changed;
+#pragma warning disable CS0108 // Member hides inherited member; missing new keyword
+        public event PropertyChangedEventHandler PropertyChanged;
+#pragma warning restore CS0108 // Member hides inherited member; missing new keyword
 
         private Student _studentP;
 
@@ -33,7 +35,7 @@ namespace AppStudent.ViewModels
             set
             {
                 _studentP = value;
-                Changed?.Invoke(this,
+                PropertyChanged?.Invoke(this,
                     new PropertyChangedEventArgs("StudentP"));
             }
         }

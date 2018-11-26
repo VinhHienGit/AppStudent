@@ -14,6 +14,19 @@
             <Style TargetType="Label">
                 <Setter Property="VerticalTextAlignment" Value="Center"/>
             </Style>
+            <Style x:Key="myEntryUsernameStyle" TargetType="mycontrols:MyEntry">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="EndAndExpand"/>
+                <Setter Property="MaxLength" Value="32"/>
+                <Setter Property="Placeholder" Value="Tài khoản của bạn"/>
+            </Style>
+            <Style x:Key="myEntryPassworkStyle" TargetType="mycontrols:MyEntry">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="EndAndExpand"/>
+                <Setter Property="MaxLength" Value="32"/>
+                <Setter Property="Placeholder" Value="Tài khoản của bạn"/>
+                <Setter Property="IsPassword" Value="True"/>
+            </Style>
             <Style x:Key="lbErrorStyle" TargetType="Label">
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
                 <Setter Property="FontSize" Value="Medium"/>
@@ -95,22 +108,34 @@
                     </Grid.ColumnDefinitions>
                     <Label Text="Tài khoản"
                    Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
-                    <mycontrols:MyEntry 
+                    <mycontrols:MyEntry LineColor="Transparent"
                                 Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="5"
-                                Placeholder="Tài khoản của bạn"
-                                LineColor="Transparent"
-                                Text="{Binding Username, Mode=TwoWay}">
-                        <!--Check length/ validate-->
+                                Text="{Binding Username, Mode=TwoWay}"
+                                Style="{StaticResource myEntryUsernameStyle}">
+                        <!--Focused-->
+                        <mycontrols:MyEntry.Triggers>
+                            <Trigger TargetType="mycontrols:MyEntry"
+                                     Property="IsFocused" Value="True">
+                                <!--<Setter Property="LineColor" Value="LightPink"/>-->
+                                <Setter Property="TextColor" Value="SlateGray"/>
+                            </Trigger>
+                        </mycontrols:MyEntry.Triggers>
                     </mycontrols:MyEntry>
                     <Label Text="Mật khẩu"
                    Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
-                    <mycontrols:MyEntry 
+                    <mycontrols:MyEntry LineColor="Transparent"
                                 Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="5"
-                                Placeholder="Mật khẩu"
-                                LineColor="Transparent"
-                                IsPassword="True"
-                                Text="{Binding Passwork, Mode=TwoWay}">
-                        <!--Check length-->
+                                Text="{Binding Passwork, Mode=TwoWay}"
+                                Style="{StaticResource myEntryPassworkStyle}">
+                        <!--Focused-->
+                        <mycontrols:MyEntry.Triggers>
+                            <Trigger TargetType="mycontrols:MyEntry"
+                                     Property="IsFocused" Value="True">
+                                <!--<Setter Property="LineColor" Value="LightPink"/>-->
+                                <Setter Property="TextColor" Value="Accent"/>
+                                <Setter Property="FontSize" Value="Large"/>
+                            </Trigger>
+                        </mycontrols:MyEntry.Triggers>
                     </mycontrols:MyEntry>
                 </Grid>
             </Frame>
@@ -124,6 +149,19 @@
                     Grid.Row="8" Grid.Column="2" Grid.ColumnSpan="5"
                     Command="{Binding Login}">
                 <!--Check empty MyEntry ... set IsEnabled-->
+                <!--<Button.Triggers>
+                    <MultiTrigger TargetType="Button">
+                        <MultiTrigger.Conditions>
+                            <BindingCondition Binding="{Binding Username}"
+                                              Value="0" />
+                            <BindingCondition Binding="{Binding Passwork}"
+                                              Value="0" />
+                        </MultiTrigger.Conditions>
+
+                        <Setter Property="IsEnabled" Value="False" />
+                        --><!-- multiple Setter elements are allowed --><!--
+                    </MultiTrigger>
+                </Button.Triggers>-->
             </Button>
         </Grid>
     </ContentPage.Content>

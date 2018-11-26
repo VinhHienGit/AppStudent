@@ -48,9 +48,10 @@ namespace AppStudent.Droid
             }
             else
             {
-                var ourcustomcolorhere = element.LineColor.ToAndroid();
-                Control.Background.SetColorFilter(ourcustomcolorhere, PorterDuff.Mode.SrcAtop);
+                var lineColor = element.LineColor.ToAndroid();
+                Control.Background.SetColorFilter(lineColor, PorterDuff.Mode.SrcAtop);
             }
+            
         }
     }
 }
