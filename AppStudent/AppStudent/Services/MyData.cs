@@ -1,109 +1,88 @@
 ﻿using AppStudent.Models;
-using System;
+using Newtonsoft.Json;
+using Refit;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace PrismQuanLySinhVien.Services
 {
+    public interface IProductsMakeUpApi
+    {
+        [Get("/api/v1/products.json?brand=maybelline")]
+        Task<string> GetMakeUps();
+    }
     public class MyData
     {
-        public List<Student> listStudent = new List<Student>();
+        private List<Account> listAccount = new List<Account>();
+        private List<Student> listStudent = new List<Student>();
+        public MyData()
+        {
+            //create data Account
+            Account admin = new Account()
+            {
+                Username = "admin",
+                Passwork = "123456",
+                State = false
+            };
+            listAccount.Add(admin);
+            listAccount.Sort();
+            //create data student
+           CallApi();
+        }
 
-        //public MyData(int num)
-        //{
-        //    Create(num);
-        //}
-        //private string RandomString(int size, bool lowerCase)
-        //{
-        //    StringBuilder sb = new StringBuilder();
-        //    char c;
-        //    Random rand = new Random();
-        //    for (int i = 0; i < size; i++)
-        //    {
-        //        c = Convert.ToChar(Convert.ToInt32(rand.Next(65, 87)));
-        //        sb.Append(c);
-        //    }
-        //    if (lowerCase)
-        //        return sb.ToString().ToLower();
-        //    return sb.ToString();
-        //}
-        //void Create (int num)
-        //{
-        //    for(int i = 0; i < num; i++ )   
-        //    {
-        //        string n= RandomString(3, false);
-        //        Random rand = new Random();
-        //        int m = rand.Next(1, 12);
-        //        int d = rand.Next(1, 28);
-        //        Student st1 = new Student()
-        //        {
-        //            Name = "Nguyễn Văn " + n,
-        //            DayOfBirth = new DateTime(1995, m, d),
-        //            Avatar = ""
-        //        };
-        //        listStudent.Add(st1);
-        //    }
-        //}
-        //Student st1 = new Student()
-        //{
-        //    Name = "Nguyễn Văn A",
-        //    DayOfBirth = new DateTime(1995, 1, 17),
-        //    Avatar = ""
-        //};
-        //Student st2 = new Student()
-        //{
-        //    Name = "Nguyễn Văn B",
-        //    DayOfBirth = new DateTime(1995, 2, 17),
-        //    Avatar = ""
-        //};
-        //Student st3 = new Student()
-        //{
-        //    Name = "Nguyễn Văn C",
-        //    DayOfBirth = new DateTime(1995, 3, 17),
-        //    Avatar = ""
-        //};
-        //Student st4 = new Student()
-        //{
-        //    Name = "Nguyễn Văn D",
-        //    DayOfBirth = new DateTime(1995, 4, 17),
-        //    Avatar = ""
-        //};
-        //Student st5 = new Student()
-        //{
-        //    Name = "Nguyễn Văn E",
-        //    DayOfBirth = new DateTime(1995, 5, 17),
-        //    Avatar = ""
-        //};
-        //Student st6 = new Student()
-        //{
-        //    Name = "Nguyễn Văn F",
-        //    DayOfBirth = new DateTime(1995, 6, 17),
-        //    Avatar = ""
-        //};
-        //Student st7 = new Student()
-        //{
-        //    Name = "Nguyễn Văn G",
-        //    DayOfBirth = new DateTime(1995, 7, 17),
-        //    Avatar = ""
-        //};
-        //Student st8 = new Student()
-        //{
-        //    Name = "Nguyễn Văn H",
-        //    DayOfBirth = new DateTime(1995, 8, 17),
-        //    Avatar = ""
-        //};
-        //Student st9 = new Student()
-        //{
-        //    Name = "Nguyễn Văn I",
-        //    DayOfBirth = new DateTime(1995, 9, 17),
-        //    Avatar = ""
-        //};
-        //Student st10 = new Student()
-        //{
-        //    Name = "Nguyễn Văn A",
-        //    DayOfBirth = new DateTime(1995, 10, 17),
-        //    Avatar = ""
-        //};
+        private static MyData instance;
+        public static MyData Instance
+        {
+            get
+            {
+                if (instance == null) instance = new MyData();
+                return instance;
+            }
+
+            private set
+            {
+                instance = value;
+            }
+        }
+
+        public List<Student> ListStudent { get => listStudent; set => listStudent = value; }
+
+        public bool CheckLogin(Account AccLogin)
+        {
+            int len = listAccount.Count;
+            int x2 = len/2;
+            bool IsAccount = false;
+            while(len>0)
+            {
+                if (string.Compare(AccLogin.Username, listAccount[x2].Username) == 0)
+                {
+                    IsAccount = (AccLogin.Passwork == listAccount[x2].Passwork) ? true : false;
+                    break;
+                }
+                else
+                {
+                    if (string.Compare(AccLogin.Username.ToString(), listAccount[x2].Username) > 0)
+                    {
+                        len = len / 2;
+                        x2 += len / 2;
+                    }
+                    else
+                    {
+                        len = len / 2;
+                        x2 -= (len / 2 == 0) ? 1 : (len / 2);
+                    }
+                }
+            }
+            return IsAccount;
+        }
+
+        private async void CallApi()
+        {
+            var nsAPI = RestService.For<IProductsMakeUpApi>("http://makeup-api.herokuapp.com");
+            var products = await nsAPI.GetMakeUps();
+            ListStudent = JsonConvert.DeserializeObject<List<Student>>(products.ToString());
+        }
+
 
     }
 }

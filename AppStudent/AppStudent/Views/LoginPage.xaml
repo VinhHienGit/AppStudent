@@ -4,46 +4,127 @@
              x:Class="AppStudent.Views.LoginPage"
              xmlns:mycontrols="clr-namespace:AppStudent.MyControls"
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
-             Title="{Binding Title}" 
-             xmlns:notifi="clr-namespace:AppStudent.ViewModels">
+             Title="{Binding Title}">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="mycontrols:MyEntry">
-                <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
-                <Setter Property="WidthRequest" Value="300"/>
-                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="EndAndExpand"/>
             </Style>
-            <notifi:NotifiLoginConverter x:Key="notifiConverter"/>
+            <Style TargetType="Label">
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="lbErrorStyle" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+                <Setter Property="FontSize" Value="Medium"/>
+                <Setter Property="TextColor" Value="Red"/>
+            </Style>
+            <Style x:Key="lbLinkStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="Blue"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="Small"/>
+            </Style>
+            <Style x:Key="fInputStyle" TargetType="Frame">
+                <Setter Property="Padding" Value="1"/>
+                <Setter Property="BackgroundColor" Value="LightBlue"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="BorderColor" Value="DeepSkyBlue"/>
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to LoginPage"
-                VerticalOptions="Center" 
-                HorizontalOptions="CenterAndExpand" />
-            <mycontrols:MyEntry x:Name="txtUsername"
-                                Placeholder="Username"
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3"/> <!--padding top-->
+                <RowDefinition Height="*"/> <!--1-->
+                <RowDefinition Height="*"/> <!--2-->
+                <RowDefinition Height="*"/> <!--3-->
+                <RowDefinition Height="*"/> <!--4-->
+                <RowDefinition Height="*"/> <!--5-->
+                <RowDefinition Height="*"/> <!--6-->
+                <RowDefinition Height="*"/> <!--7-->
+                <RowDefinition Height="*"/> <!--8-->
+                <RowDefinition Height="*"/> <!--9-->
+                <RowDefinition Height="*"/> <!--10-->
+                <RowDefinition Height="*"/> <!--11-->
+                <RowDefinition Height="*"/> <!--12-->
+                <RowDefinition Height="3"/> <!--padding bottom-->
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3"/> <!--padding left -->
+                <ColumnDefinition Width="*"/> <!--1 -->
+                <ColumnDefinition Width="*"/> <!--2 -->
+                <ColumnDefinition Width="*"/> <!--3 -->
+                <ColumnDefinition Width="*"/> <!--4 -->
+                <ColumnDefinition Width="*"/> <!--5 -->
+                <ColumnDefinition Width="*"/> <!--6 -->
+                <ColumnDefinition Width="*"/> <!--7 -->
+                <ColumnDefinition Width="3"/> <!--padding right -->
+            </Grid.ColumnDefinitions>
+            <Label Text="Đăng Nhập"
+                   Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="8"
+                   Style="{StaticResource lbTitle}"/>
+            <Label Text="{Binding Error}"
+                   Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="8"
+                   Style="{StaticResource lbErrorStyle}"/>
+            <Frame 
+                   Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="7" Grid.RowSpan="2"
+                   Style="{StaticResource fInputStyle}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <!--0-->
+                        <RowDefinition Height="*"/>
+                        <!--1-->
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <!--0 -->
+                        <ColumnDefinition Width="*"/>
+                        <!--1 -->
+                        <ColumnDefinition Width="*"/>
+                        <!--2 -->
+                        <ColumnDefinition Width="*"/>
+                        <!--3 -->
+                        <ColumnDefinition Width="*"/>
+                        <!--4 -->
+                        <ColumnDefinition Width="*"/>
+                        <!--5 -->
+                        <ColumnDefinition Width="*"/>
+                        <!--6 -->
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Tài khoản"
+                   Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+                    <mycontrols:MyEntry 
+                                Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="5"
+                                Placeholder="Tài khoản của bạn"
                                 LineColor="Transparent"
                                 Text="{Binding Username, Mode=TwoWay}">
-                <mycontrols:MyEntry.Behaviors>
-                    <b:EventToCommandBehavior EventName="TextChanged"
-                                              Command="{Binding Login}"/>
-                </mycontrols:MyEntry.Behaviors>
-            </mycontrols:MyEntry>
-            <mycontrols:MyEntry x:Name="txtPasswork"
-                                Placeholder="Passwork"
+                        <!--Check length/ validate-->
+                    </mycontrols:MyEntry>
+                    <Label Text="Mật khẩu"
+                   Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
+                    <mycontrols:MyEntry 
+                                Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="5"
+                                Placeholder="Mật khẩu"
                                 LineColor="Transparent"
-                                Text="{Binding Username, Mode=TwoWay}">
-                <mycontrols:MyEntry.Behaviors>
-                    <b:EventToCommandBehavior EventName="TextChanged"
-                                              Command="{Binding Login}"/>
-                </mycontrols:MyEntry.Behaviors>
-            </mycontrols:MyEntry>
-            <Label Text="{Binding Username}"
-                   HorizontalOptions="CenterAndExpand"
-                   VerticalOptions="Center"/>
-            <Button Text="Login"
-                    Command="{Binding GotoMainPage}"/>
-        </StackLayout>
+                                IsPassword="True"
+                                Text="{Binding Passwork, Mode=TwoWay}">
+                        <!--Check length-->
+                    </mycontrols:MyEntry>
+                </Grid>
+            </Frame>
+            <StackLayout  HorizontalOptions="CenterAndExpand" Padding="4,0,-2,0"
+                          Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="7">
+                <Label Text="Quên mật khẩu?"
+                       Style="{StaticResource lbLinkStyle}"/>
+                <BoxView Style="{StaticResource bvUnderlineLinkStyle}"/>
+            </StackLayout>
+            <Button Text="Đăng nhập"
+                    Grid.Row="8" Grid.Column="2" Grid.ColumnSpan="5"
+                    Command="{Binding Login}">
+                <!--Check empty MyEntry ... set IsEnabled-->
+            </Button>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

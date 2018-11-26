@@ -5,6 +5,7 @@ using Prism.Commands;
 using Prism.Navigation;
 using AppStudent.Models;
 using System.ComponentModel;
+using PrismQuanLySinhVien.Services;
 
 namespace AppStudent.ViewModels
 {
@@ -21,73 +22,33 @@ namespace AppStudent.ViewModels
         public LoginPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             Title = "Đăng nhập";
-            Error = "hi";
-            AccLogin = new Account()
-            {
-                Username = "",
-                Passwork = "",
-                State = false
-            };
-            GotoMainPage = new DelegateCommand(main);
-            //Login = new DelegateCommand(ExcuteLogin, CanLogin);
+            Error = "Đăng nhập để tiếp tục";
+            AccLogin = new Account();
+            Login = new DelegateCommand(ExcuteLogin);
         }
-
-        public DelegateCommand GotoMainPage { get; private set; }
-
-        void main()
-        {
-            NavigationService.NavigateAsync("Main");
-        }
-
+        
         #region DelegateCommand Login
         public DelegateCommand Login { get; private set; }
 
         void ExcuteLogin()
         {
             // check account login
-            if(checkLogin(AccLogin))
+            if(MyData.Instance.CheckLogin(AccLogin))
             {
-                NavigationService.NavigateAsync("stuMain");
                 AccLogin.State = true;
+                Error = "";
+                NavigationParameters navigateParameter = new NavigationParameters
+                {
+                    { "AccLogin", AccLogin }
+                };
+                NavigationService.NavigateAsync("Main", navigateParameter);
+                //UPdate Account DB 
             }
             else
             {
                 Error = "Sai tên tài khoản hoặc mật khẩu.";
             }
         }
-
-        bool CanLogin()
-        {
-            // check empty
-            bool checkEmpty = true;
-            if (string.IsNullOrEmpty(AccLogin.Username) || string.IsNullOrEmpty(AccLogin.Passwork))
-            {
-                checkEmpty = false;
-            }
-            return checkEmpty;
-        }
-        private bool checkLogin(Account accLogin)
-        {
-            // check accLogin in DB            
-            return (CheckUsername(accLogin.Username) && CheckPasswork(accLogin.Passwork));
-        }
-
-        private bool CheckUsername(string username)
-        {
-            // check username in DB
-
-            return false;
-        }
-
-        private bool CheckPasswork(string passwork)
-        {
-            // check passwork in DB
-
-            return false;
-        }
-
-        
-
         #endregion
 
         
@@ -103,7 +64,6 @@ namespace AppStudent.ViewModels
             get { return _error; }
             set
             {
-               
                 SetProperty(ref _error, value);
                 Changed?.Invoke(this, new PropertyChangedEventArgs(Error));
             }
@@ -117,6 +77,7 @@ namespace AppStudent.ViewModels
             get { return _username; }
             set
             {
+                Error = "";
                 SetProperty(ref _username, value);
                 Changed?.Invoke(this, new PropertyChangedEventArgs(Username));
                 AccLogin.Username = value;
@@ -128,6 +89,7 @@ namespace AppStudent.ViewModels
             get { return _passwork; }
             set
             {
+                Error = "";
                 SetProperty(ref _passwork, value);
                 Changed?.Invoke(this, new PropertyChangedEventArgs(Passwork));
                 AccLogin.Passwork = value;

@@ -11,27 +11,28 @@
                 <Setter Property="TextColor" Value="Blue"/>
             </Style>
             <Style x:Key="lbInputStyle" TargetType="Label">
-
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+                <Setter Property="VerticalTextAlignment" Value="End"/>
             </Style>
             <Style x:Key="EntryInputStyle" TargetType="mycontrols:MyEntry">
-                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
             </Style>
             <Style x:Key="EntryInputDateStyle" TargetType="mycontrols:MyEntry">
-                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
             </Style>
             <Style x:Key="AvatarStyle" TargetType="Image">
                 <Setter Property="BackgroundColor" Value="Blue"/>
                 <Setter Property="Aspect" Value="AspectFill"/>
             </Style>
             <Style x:Key="EdittorIntroduceStyle" TargetType="Editor">
-                <Setter Property="BackgroundColor" Value="Aqua"/>
+                <Setter Property="BackgroundColor" Value="LightGray"/>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
             </Style>
             
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <ScrollView>
-            <Grid>
+        <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="3"/>
                     <RowDefinition Height="*"/>
@@ -126,8 +127,9 @@
                                     LineColor="Aqua"
                    Style="{StaticResource EntryInputStyle}"/>
                 <Editor Text="{Binding StudentP.Description}"
-                    Grid.Row="7" Grid.Column="3" Grid.ColumnSpan="7" Grid.RowSpan="4"
-                    Style="{StaticResource EdittorIntroduceStyle}"/>
+                            Grid.Row="7" Grid.Column="3" Grid.ColumnSpan="8" Grid.RowSpan="4"
+                            Style="{StaticResource EdittorIntroduceStyle}"/>
+
                 <!---->
                 
                 <!--Image Avatar-->
@@ -136,14 +138,13 @@
                    Style="{StaticResource AvatarStyle}"/>
                 <!---->
                 <!--Button-->
-                <Button Text="Cập nhật"
+                <!--<Button Text="Cập nhật"
                         Grid.Row="11" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="5"
                         Command="{Binding UpdateInfoCommand}"/>
                 <Button Text="Xóa SV"
                         Grid.Row="11" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="5"
-                        Command="{Binding DeleteInfoCommand}"/>
+                        Command="{Binding DeleteInfoCommand}"/>-->
                 <!---->
         </Grid>
-        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

@@ -8,13 +8,27 @@
 		<!-- Application resource dictionary -->
         <Style TargetType="Button">
             <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
-            <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
             <Setter Property="BorderRadius" Value="20"/>
             <Setter Property="BorderColor" Value="DimGray"/>
         </Style>
         <Style TargetType="Label">
             <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
-            <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+        </Style>
+        <Style x:Key="lbTitle" TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+            <Setter Property="Margin" Value="20,0,0,0"/>
+            <Setter Property="FontSize" Value="Large"/>
+            <Setter Property="TextColor" Value="ForestGreen"/>
+        </Style>
+        <Style x:Key="lbLinkStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="Blue"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+        <Style x:Key="bvUnderlineLinkStyle" TargetType="BoxView">
+            <Setter Property="HeightRequest" Value="1"/>
+            <Setter Property="BackgroundColor" Value="Blue"/>
+            <Setter Property="Margin" Value="4,-8,0,0"/>
         </Style>
         <x:String x:Key="dateMonthYear">{0:dd/MM/yyyy}</x:String>
 	</Application.Resources>

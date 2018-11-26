@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Net.Http;
-using System.Text;
 using AppStudent.Models;
-using AppStudent.Views;
 using Prism.Commands;
 using Prism.Navigation;
-using Xamarin.Forms;
 
 namespace AppStudent.ViewModels
 {
@@ -23,8 +18,8 @@ namespace AppStudent.ViewModels
     }
     public class StudentManagementPageViewModel : ViewModelBase
     {
-        
-        
+
+        public Account AccLogin { get; set; }
         public ObservableCollection<StudentManagementPageMenuItem> MenuItems { get; set; }
         public StudentManagementPageViewModel(INavigationService navigationService) : base(navigationService)
         {
@@ -49,11 +44,21 @@ namespace AppStudent.ViewModels
         {
             if (!string.IsNullOrEmpty(page))
             {
+
+                NavigationParameters para = new NavigationParameters
+                {
+                    { "AccLogin", AccLogin }
+                };
                 NavigationService.NavigateAsync(new Uri(page, UriKind.Absolute));
             }
 
         }
 
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            base.OnNavigatedTo(parameters);
+            AccLogin = parameters["AccLogin"] as Account;
+        }
 
         #region SelectedItem
         private StudentManagementPageMenuItem _selectedItemb;

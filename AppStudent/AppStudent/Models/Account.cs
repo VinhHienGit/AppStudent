@@ -12,7 +12,7 @@ namespace AppStudent.Models
 
         public Account()
         {
-
+            this._state = false;
         }
 
         public string Username { get => _username; set => _username = value; }

@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppStudent.Views.ListStudentsPage"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             BackgroundColor="LightPink">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="ListViewItemText" TargetType="Label">
@@ -28,15 +29,6 @@
             ItemsSource="{Binding ItemSouce}"
             CachingStrategy="RecycleElement"
             SelectedItem="{Binding SelectedItemb, Mode=TwoWay}">
-        <!--Built in Cells-->
-        <!--<ListView.ItemTemplate>
-            <DataTemplate>
-                <ImageCell ImageSource="ic_launcher.png" Text="Ahihi"/>
-            </DataTemplate>
-        </ListView.ItemTemplate>-->
-
-        <!--Custom View Cells-->
-
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>

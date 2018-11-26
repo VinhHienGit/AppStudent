@@ -7,16 +7,7 @@
                   xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms">
     <MasterDetailPage.Resources>
         <ResourceDictionary>
-            <Style x:Key="menuLink" TargetType="Label">
-                <Setter Property="TextColor" Value="Blue"/>
-                <Setter Property="VerticalTextAlignment" Value="Center"/>
-                <Setter Property="FontSize" Value="20"/>
-            </Style>
-            <Style x:Key="underlineLink" TargetType="BoxView">
-                <Setter Property="HeightRequest" Value="1"/>
-                <Setter Property="BackgroundColor" Value="Blue"/>
-                <Setter Property="Margin" Value="4,-8,0,0"/>
-            </Style>
+            
         </ResourceDictionary>
     </MasterDetailPage.Resources>
   <MasterDetailPage.Master>
@@ -52,17 +43,12 @@
                             <ViewCell>
                                 <StackLayout  HorizontalOptions="StartAndExpand" Padding="4,0,-2,0">
                                     <Label Text="{Binding TitleDetail}"
-                                           Style="{StaticResource menuLink}"/>
-                                    <BoxView Style="{StaticResource underlineLink}"/>
+                                           Style="{StaticResource lbLinkStyle}"/>
+                                    <BoxView Style="{StaticResource bvUnderlineLinkStyle}"/>
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-                    <!--<ListView.Behaviors>
-                        <b:EventToCommandBehavior EventName="ItemSelected"
-                                                  Command="{Binding OnNavigateCommand}"
-                                                  CommandParameter="SelectedItem"/>
-                    </ListView.Behaviors>-->
                 </ListView>
                 <Button Text="Đăng xuất"
                         Command="{Binding LogoutCommand}"/>

@@ -1,50 +1,37 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Net.Http;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using AppStudent.Models;
-using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Navigation;
+using PrismQuanLySinhVien.Services;
 using Refit;
 
 namespace AppStudent.ViewModels
 {
-    public interface IMakeUpApi
-    {
-        [Get("/api/v1/products.json?brand=maybelline")]
-        Task<string> GetMakeUps();
-    }
-
     
     public class ListStudentsPageViewModel : ViewModelBase, INotifyPropertyChanged
     {
 #pragma warning disable CS0108 // Member hides inherited member; missing new keyword
         public event PropertyChangedEventHandler PropertyChanged;
 #pragma warning restore CS0108 // Member hides inherited member; missing new keyword
+
+        public Account AccLogin { get; set; }
         private ObservableCollection<Student> _itemSouce;
         private List<Student> _listStudent;
         public ListStudentsPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             Title = "Danh sách sinh viên";
             OnNavigateCommand = new DelegateCommand<INavigationParameters>(Navigate);
-            CallApi();
+            ListStudent = MyData.Instance.ListStudent;
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
-        }
-        async void CallApi()
-        {
-            var nsAPI = RestService.For<IMakeUpApi>("http://makeup-api.herokuapp.com");
-            var sugars = await nsAPI.GetMakeUps();
-            ListStudent =  JsonConvert.DeserializeObject<List < Student >> (sugars.ToString());
+            
+            //AccLogin = parameters["AccLogin"] as Account;
         }
         public DelegateCommand<INavigationParameters> OnNavigateCommand { get; set; }
         void Navigate(INavigationParameters p)
