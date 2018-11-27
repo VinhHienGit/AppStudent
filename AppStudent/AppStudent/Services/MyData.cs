@@ -20,8 +20,8 @@ namespace PrismQuanLySinhVien.Services
             //create data Account
             Account admin = new Account()
             {
-                Username = "admin",
-                Passwork = "123456",
+                Username = "admin123",
+                Passwork = "123@123123",
                 State = false
             };
             listAccount.Add(admin);

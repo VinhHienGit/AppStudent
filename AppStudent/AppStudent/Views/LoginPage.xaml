@@ -9,6 +9,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:CanLoginConverter x:Key="dataHasBeenEntered" />
+            <local:ValidatePasswordConverter x:Key="passwordStrength"/>
             <Style TargetType="mycontrols:MyEntry">
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
                 <Setter Property="VerticalOptions" Value="EndAndExpand"/>
@@ -48,7 +49,7 @@
             <Style TargetType="Button">
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
                 <Setter Property="BackgroundColor" Value="LightGray"/>
-                <Setter Property="IsEnabled" Value="False"/>
+                <Setter Property="IsEnabled" Value="True"/>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -180,6 +181,9 @@
                             <BindingCondition Binding="{Binding Source={x:Reference etPasswork},
                                                                 Path=Text.Length,
                                                                 Converter={StaticResource dataHasBeenEntered}}"
+                                              Value="true" />
+                            <BindingCondition Binding="{Binding Passwork,
+                                                                Converter={StaticResource passwordStrength}}"
                                               Value="true" />
                         </MultiTrigger.Conditions>
                         <Setter Property="BackgroundColor" Value="BlueViolet"/>

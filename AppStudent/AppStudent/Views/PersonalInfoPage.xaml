@@ -47,6 +47,9 @@
             <Label Text="Nguyễn Lê Vinh Hiển"
                    Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="7"
                    FontSize="Large"/>
+            <Button Text="Đăng xuất"
+                    Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="7"
+                Command="{Binding ApplicationCommands.LogoutCommand}"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

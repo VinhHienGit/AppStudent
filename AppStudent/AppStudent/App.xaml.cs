@@ -4,6 +4,7 @@ using AppStudent.ViewModels;
 using AppStudent.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using AppStudent.Models;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace AppStudent
@@ -37,7 +38,10 @@ namespace AppStudent
             containerRegistry.RegisterForNavigation<ListStudentsPage, ListStudentsPageViewModel>("ListStuP");
             containerRegistry.RegisterForNavigation<StudentInfoPage, StudentInfoPageViewModel>("stuInfoP");
 
+            
             // Register signgleton
+            containerRegistry.RegisterSingleton<IApplicationCommands, ApplicationCommands>();
+            containerRegistry.RegisterSingleton<IApplicationDatas, ApplicationDatas>();
         }
     }
 }

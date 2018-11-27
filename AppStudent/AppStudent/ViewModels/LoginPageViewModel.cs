@@ -6,6 +6,7 @@ using Prism.Navigation;
 using AppStudent.Models;
 using System.ComponentModel;
 using PrismQuanLySinhVien.Services;
+using System.Text.RegularExpressions;
 
 namespace AppStudent.ViewModels
 {
@@ -24,6 +25,7 @@ namespace AppStudent.ViewModels
             Title = "Đăng nhập";
             Error = "Đăng nhập để tiếp tục";
             AccLogin = new Account();
+            Passwork = "";
             LoginCommand = new DelegateCommand(ExcuteLogin);
             ForgetPasswork = new DelegateCommand(ExcuteShowPass);
         }
@@ -34,7 +36,8 @@ namespace AppStudent.ViewModels
         void ExcuteLogin()
         {
             // check account login
-            if(MyData.Instance.CheckLogin(AccLogin))
+
+            if (MyData.Instance.CheckLogin(AccLogin))
             {
                 AccLogin.State = true;
                 Error = "";
@@ -49,6 +52,7 @@ namespace AppStudent.ViewModels
             {
                 Error = "Sai tên tài khoản hoặc mật khẩu.";
             }
+
         }
         
         #endregion

@@ -50,7 +50,7 @@
                     </ListView.ItemTemplate>
                 </ListView>
                 <Button Text="Đăng xuất"
-                        Command="{Binding LogoutCommand}"/>
+                        Command="{Binding ApplicationCommands.LogoutCommand}"/>
             </StackLayout>
         </ContentPage>
     </MasterDetailPage.Master>

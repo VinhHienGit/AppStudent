@@ -21,7 +21,7 @@ namespace AppStudent.ViewModels
 
         public Account AccLogin { get; set; }
         public ObservableCollection<StudentManagementPageMenuItem> MenuItems { get; set; }
-        public StudentManagementPageViewModel(INavigationService navigationService) : base(navigationService)
+        public StudentManagementPageViewModel(INavigationService navigationService, IApplicationCommands applicationCommands, IApplicationDatas applicationDatas) : base(navigationService,applicationCommands, applicationDatas)
         {
             Title = "Quản lý sinh viên";
             MenuItems = new ObservableCollection<StudentManagementPageMenuItem>(new[]
@@ -30,10 +30,19 @@ namespace AppStudent.ViewModels
                     new StudentManagementPageMenuItem { Id = 1, TitleDetail = "Danh sách sinh viên", TargetType = "ListStuP" },
                 });
             OnNavigateCommand = new DelegateCommand<string>(Navigate);
-            LogoutCommand = new DelegateCommand(Logout);
+            LogoutCommandP = new DelegateCommand(Logout);
+            applicationCommands.LogoutCommand.RegisterCommand(LogoutCommandP);
+            ApplicationCommands = applicationCommands;
         }
 
-        public DelegateCommand LogoutCommand { get; set; }
+        private IApplicationCommands _applicationCommands;
+        public new IApplicationCommands ApplicationCommands
+        {
+            get { return _applicationCommands; }
+            set { SetProperty(ref _applicationCommands, value); }
+        }
+
+        public DelegateCommand LogoutCommandP { get; set; }
 
         void Logout()
         {

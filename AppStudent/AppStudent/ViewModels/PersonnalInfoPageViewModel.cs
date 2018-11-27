@@ -9,7 +9,7 @@ namespace AppStudent.ViewModels
     {
         public event PropertyChangedEventHandler Changed;
         private Account _accLogin;
-        public PersonnalInfoPageViewModel(INavigationService navigationService) : base(navigationService)
+        public PersonnalInfoPageViewModel(INavigationService navigationService, ApplicationCommands applicationCommands, ApplicationDatas applicationDatas) : base(navigationService, applicationCommands, applicationDatas)
         {
             Title = "Thông tin cá nhân";
         }
