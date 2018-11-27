@@ -48,8 +48,8 @@ namespace AppStudent.ViewModels
             }
             set
             {
-                _selectedItemb = value;
-
+                SetProperty(ref _selectedItemb, value);
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedItemb"));
                 if (_selectedItemb == null)
                     return;
                 NavigationParameters parameter = new NavigationParameters
