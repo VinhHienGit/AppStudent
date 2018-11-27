@@ -24,11 +24,12 @@ namespace AppStudent.ViewModels
             Title = "Đăng nhập";
             Error = "Đăng nhập để tiếp tục";
             AccLogin = new Account();
-            Login = new DelegateCommand(ExcuteLogin);
+            LoginCommand = new DelegateCommand(ExcuteLogin);
+            ForgetPasswork = new DelegateCommand(ExcuteShowPass);
         }
         
         #region DelegateCommand Login
-        public DelegateCommand Login { get; private set; }
+        public DelegateCommand LoginCommand { get; private set; }
 
         void ExcuteLogin()
         {
@@ -52,7 +53,12 @@ namespace AppStudent.ViewModels
         
         #endregion
 
-        
+        public DelegateCommand ForgetPasswork { get; private set; }
+
+        void ExcuteShowPass()
+        {
+            Error = "Mật khẩu: 123456";
+        }
 
         #region ApplicationCommand
 

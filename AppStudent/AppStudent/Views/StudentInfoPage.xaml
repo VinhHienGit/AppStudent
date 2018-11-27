@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mycontrols="clr-namespace:AppStudent.MyControls"
              x:Class="AppStudent.Views.StudentInfoPage"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              Title="{Binding Title}">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -129,9 +130,15 @@
                 <!---->
                 
                 <!--Image Avatar-->
-                <Image Source="{Binding StudentP.Image_link}"
+            <Image Source="{Binding StudentP.Image_link}"
                    Grid.Row="2" Grid.Column="8" Grid.RowSpan="2" Grid.ColumnSpan="3"
-                   Style="{StaticResource AvatarStyle}"/>
+                   Style="{StaticResource AvatarStyle}">
+                <Image.Behaviors>
+                    <b:EventToCommandBehavior EventName="Focused"
+                                              Command=""
+                                              CommandParameter=""/>
+                </Image.Behaviors>
+            </Image>
                 <!---->
                 <!--Button-->
                 <!--<Button Text="Cập nhật"

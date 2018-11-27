@@ -44,7 +44,6 @@
                                 <StackLayout  HorizontalOptions="StartAndExpand" Padding="4,0,-2,0">
                                     <Label Text="{Binding TitleDetail}"
                                            Style="{StaticResource lbLinkStyle}"/>
-                                    <BoxView Style="{StaticResource bvUnderlineLinkStyle}"/>
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>
@@ -56,6 +55,10 @@
         </ContentPage>
     </MasterDetailPage.Master>
     <MasterDetailPage.Detail>
-        <pages:StudentManagementPageDetail Title="Detail"/>
+        <NavigationPage>
+            <x:Arguments>
+                <pages:StudentManagementPageDetail Title="Trang chu"/>
+            </x:Arguments>
+        </NavigationPage>
     </MasterDetailPage.Detail>
 </MasterDetailPage>

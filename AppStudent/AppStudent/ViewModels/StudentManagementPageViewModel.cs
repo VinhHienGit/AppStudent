@@ -37,7 +37,7 @@ namespace AppStudent.ViewModels
 
         void Logout()
         {
-            NavigationService.NavigateAsync("LoginP");
+            NavigationService.NavigateAsync(new Uri("/LoginP"));
         }
         public DelegateCommand<string> OnNavigateCommand { get; set; }
         void Navigate(string page)
@@ -49,7 +49,7 @@ namespace AppStudent.ViewModels
                 {
                     { "AccLogin", AccLogin }
                 };
-                NavigationService.NavigateAsync(new Uri(page, UriKind.Absolute));
+                NavigationService.NavigateAsync(new Uri(page, UriKind.Absolute), para);
             }
 
         }

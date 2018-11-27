@@ -11,7 +11,7 @@ namespace AppStudent.ViewModels
         public object Convert(object value, Type targetType,
             object parameter, CultureInfo culture)
         {
-            if ((int)value > 3) // length > 0 ?
+            if ((int)value > 8) // length > 0 ?
                 return true;            // some data has been entered
             else
                 return false;            // input is empty

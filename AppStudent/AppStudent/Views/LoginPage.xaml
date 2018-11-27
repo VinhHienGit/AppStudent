@@ -4,6 +4,7 @@
              x:Class="AppStudent.Views.LoginPage"
              xmlns:mycontrols="clr-namespace:AppStudent.MyControls"
              xmlns:local="clr-namespace:AppStudent.ViewModels"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              Title="{Binding Title}">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -44,7 +45,7 @@
                 <Setter Property="CornerRadius" Value="10"/>
                 <Setter Property="BorderColor" Value="DeepSkyBlue"/>
             </Style>
-            <Style x:Key="btLoginStyle" TargetType="Button">
+            <Style TargetType="Button">
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
                 <Setter Property="BackgroundColor" Value="LightGray"/>
                 <Setter Property="IsEnabled" Value="False"/>
@@ -149,14 +150,25 @@
             </Frame>
             <StackLayout  HorizontalOptions="CenterAndExpand" Padding="4,0,-2,0"
                           Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="7">
+                <!--<mycontrols:MyLabel Text="Quên mật khẩu?"
+                       Style="{StaticResource lbLinkStyle}">
+                    --><!--<Label.Behaviors>
+                        <b:EventToCommandBehavior EventName=""
+                                                  Command="{Binding ForgetPasswork}"
+                                                  CommandParameter=""/>
+                    </Label.Behaviors>--><!--
+                </mycontrols:MyLabel>-->
                 <Label Text="Quên mật khẩu?"
-                       Style="{StaticResource lbLinkStyle}"/>
+                       Style="{StaticResource lbLinkStyle}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ForgetPasswork}"/>
+                    </Label.GestureRecognizers>
+                </Label>
                 <BoxView Style="{StaticResource bvUnderlineLinkStyle}"/>
             </StackLayout>
             <Button Text="Đăng nhập"
                     Grid.Row="8" Grid.Column="2" Grid.ColumnSpan="5"
-                    Command="{Binding Login}"
-                    Style="{StaticResource btLoginStyle}">
+                    Command="{Binding LoginCommand}">
                 <!--Check empty MyEntry ... set IsEnabled-->
                 <Button.Triggers>
                     <MultiTrigger TargetType="Button">

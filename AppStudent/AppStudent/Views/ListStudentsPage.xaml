@@ -50,7 +50,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Image Source="{Binding Image_link}"
-                       Grid.Row="0" Grid.Column="0" Grid.RowSpan="6"
+                          Grid.Row="0" Grid.Column="0" Grid.RowSpan="6"
                           Style="{StaticResource ListViewItemImage}"/>
                         <Label Text="{Binding Name}"
                           Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="5" Grid.RowSpan="4"

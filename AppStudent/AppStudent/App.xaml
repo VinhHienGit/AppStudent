@@ -10,6 +10,7 @@
             <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
             <Setter Property="BorderRadius" Value="20"/>
             <Setter Property="BorderColor" Value="DimGray"/>
+            <Setter Property="BackgroundColor" Value="Red"/>
         </Style>
         <Style TargetType="Label">
             <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
@@ -24,6 +25,7 @@
             <Setter Property="TextColor" Value="Blue"/>
             <Setter Property="VerticalTextAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="20"/>
+            <Setter Property="TextDecorations" Value="Underline"/>
         </Style>
         <Style x:Key="bvUnderlineLinkStyle" TargetType="BoxView">
             <Setter Property="HeightRequest" Value="1"/>
