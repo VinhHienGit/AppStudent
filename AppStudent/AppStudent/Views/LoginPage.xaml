@@ -3,10 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppStudent.Views.LoginPage"
              xmlns:mycontrols="clr-namespace:AppStudent.MyControls"
-             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:local="clr-namespace:AppStudent.ViewModels"
              Title="{Binding Title}">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <local:CanLoginConverter x:Key="dataHasBeenEntered" />
             <Style TargetType="mycontrols:MyEntry">
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
                 <Setter Property="VerticalOptions" Value="EndAndExpand"/>
@@ -24,7 +25,7 @@
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
                 <Setter Property="VerticalOptions" Value="EndAndExpand"/>
                 <Setter Property="MaxLength" Value="32"/>
-                <Setter Property="Placeholder" Value="Tài khoản của bạn"/>
+                <Setter Property="Placeholder" Value="Mật khẩu"/>
                 <Setter Property="IsPassword" Value="True"/>
             </Style>
             <Style x:Key="lbErrorStyle" TargetType="Label">
@@ -42,6 +43,11 @@
                 <Setter Property="BackgroundColor" Value="LightBlue"/>
                 <Setter Property="CornerRadius" Value="10"/>
                 <Setter Property="BorderColor" Value="DeepSkyBlue"/>
+            </Style>
+            <Style x:Key="btLoginStyle" TargetType="Button">
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+                <Setter Property="BackgroundColor" Value="LightGray"/>
+                <Setter Property="IsEnabled" Value="False"/>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -108,7 +114,8 @@
                     </Grid.ColumnDefinitions>
                     <Label Text="Tài khoản"
                    Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
-                    <mycontrols:MyEntry LineColor="Transparent"
+                    <mycontrols:MyEntry x:Name="etUsername"
+                                LineColor="Transparent"
                                 Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="5"
                                 Text="{Binding Username, Mode=TwoWay}"
                                 Style="{StaticResource myEntryUsernameStyle}">
@@ -123,7 +130,8 @@
                     </mycontrols:MyEntry>
                     <Label Text="Mật khẩu"
                    Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
-                    <mycontrols:MyEntry LineColor="Transparent"
+                    <mycontrols:MyEntry x:Name="etPasswork"
+                                LineColor="Transparent"
                                 Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="5"
                                 Text="{Binding Passwork, Mode=TwoWay}"
                                 Style="{StaticResource myEntryPassworkStyle}">
@@ -147,21 +155,25 @@
             </StackLayout>
             <Button Text="Đăng nhập"
                     Grid.Row="8" Grid.Column="2" Grid.ColumnSpan="5"
-                    Command="{Binding Login}">
+                    Command="{Binding Login}"
+                    Style="{StaticResource btLoginStyle}">
                 <!--Check empty MyEntry ... set IsEnabled-->
-                <!--<Button.Triggers>
+                <Button.Triggers>
                     <MultiTrigger TargetType="Button">
                         <MultiTrigger.Conditions>
-                            <BindingCondition Binding="{Binding Username}"
-                                              Value="0" />
-                            <BindingCondition Binding="{Binding Passwork}"
-                                              Value="0" />
+                            <BindingCondition Binding="{Binding Source={x:Reference etUsername},
+                                                                Path=Text.Length,
+                                                                Converter={StaticResource dataHasBeenEntered}}"
+                                              Value="true" />
+                            <BindingCondition Binding="{Binding Source={x:Reference etPasswork},
+                                                                Path=Text.Length,
+                                                                Converter={StaticResource dataHasBeenEntered}}"
+                                              Value="true" />
                         </MultiTrigger.Conditions>
-
-                        <Setter Property="IsEnabled" Value="False" />
-                        --><!-- multiple Setter elements are allowed --><!--
+                        <Setter Property="BackgroundColor" Value="BlueViolet"/>
+                        <Setter Property="IsEnabled" Value="True"/>
                     </MultiTrigger>
-                </Button.Triggers>-->
+                </Button.Triggers>
             </Button>
         </Grid>
     </ContentPage.Content>
